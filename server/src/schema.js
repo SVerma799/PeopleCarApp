@@ -91,6 +91,27 @@ const typeDefs = gql`
     updatePerson(id: String!, firstName: String, lastName: String): Person
 
     removePerson(id: String!): Person
+
+    addCar(
+        id: String
+        year: Int!
+        make: String!
+        model: String!
+        price: Float!
+        personId: String!
+      ): Car
+  
+      updateCar(
+        id: String!
+        year: Int
+        make: String
+        model: String
+        price: Float
+        personId: String
+      ): Car
+  
+      removeCar(id: String!): Car
+    }
   }
 `;
 
@@ -99,6 +120,10 @@ const resolvers = {
     people: () => people,
     person(parent, args, context, info) {
       return find(people, { id: args.id });
+    },
+    cars: () => cars,
+    car(parent, args, context, info) {
+      return find(cars, { id: args.id });
     },
   },
 
@@ -121,6 +146,43 @@ const resolvers = {
       }
       remove(people, { id: args.id });
       return removedPerson;
+    },
+    
+    /* Mutation functions for cars */
+    addCar(root, args) {
+      const newCar = {
+        id: args.id,
+        year: args.year,
+        make: args.make,
+        model: args.model,
+        price: args.price,
+        personId: args.personId,
+      };
+      cars.push(newCar);
+      return newCar;
+    },
+
+    updateCar: (root, args) => {
+      const car = find(cars, { id: args.id });
+      if (!car) {
+        throw new Error(`Couldn't find the car with id ${args.id}`);
+      }
+      car.year = args.year;
+      car.make = args.make;
+      car.model = args.model;
+      car.price = args.price;
+      car.personId = args.personId;
+      return car;
+    },
+
+    removeCar: (root, args) => {
+      const removedCar = find(cars, { id: args.id });
+      if (!removedCar) {
+        throw new Error(`Couldn't find the car with id ${args.id}`);
+      }
+
+      remove(cars, { id: args.id });
+      return removedCar;
     },
   },
 };
