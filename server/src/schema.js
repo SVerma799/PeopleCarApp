@@ -128,6 +128,7 @@ const resolvers = {
   },
 
   Mutation: {
+    
     /* Mutation functions for people */
     addPerson(root, args) {
       const newPerson = {
@@ -147,7 +148,7 @@ const resolvers = {
       remove(people, { id: args.id });
       return removedPerson;
     },
-    
+
     /* Mutation functions for cars */
     addCar(root, args) {
       const newCar = {
