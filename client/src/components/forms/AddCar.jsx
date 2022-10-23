@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Form, Input, Button, Select } from "antd";
 import { v4 as uuidv4 } from "uuid";
@@ -46,7 +46,7 @@ export default function AddCar() {
   const { loading, error, data } = useQuery(GET_PEOPLE);
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-  
+
   return (
     <>
       <h2>Add a Car</h2>

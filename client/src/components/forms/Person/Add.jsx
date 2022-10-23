@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Form, Input, Button } from "antd";
 import { v4 as uuidv4 } from "uuid";
-import { ADD_PERSON, GET_PEOPLE } from "../../queries";
+import { ADD_PERSON, GET_PEOPLE } from "../../../queries";
 
-export default function AddPerson() {
+
+
+export default function Add() {
   const [form] = Form.useForm();
   const [id, setId] = useState(uuidv4());
   const [addPerson] = useMutation(ADD_PERSON);
