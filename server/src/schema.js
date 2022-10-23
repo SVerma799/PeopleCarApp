@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-core";
-import { find, remove } from "lodash";
-
+import pkg from "lodash";
+const { find, remove } = pkg;
 const people = [
   {
     id: "1",
@@ -62,6 +62,58 @@ const cars = [
   },
 ];
 
+// const typeDefs = gql`
+//   type Person {
+//     id: String!
+//     firstName: String!
+//     lastName: String!
+//   }
+
+//   type Car {
+//     id: String!
+//     make: String!
+//     model: String!
+//     year: Int!
+//     price: Float!
+//     personId: String!
+//   }
+
+//   type Query {
+//     person(id: String!): Person
+//     people: [People]
+//     car(id: String): Car
+//     cars: [Car]
+//   }
+
+//   type Mutation {
+//     addPerson(id: String, firstName: String!, lastName: String!): Person
+
+//     updatePerson(id: String!, firstName: String, lastName: String): Person
+
+//     removePerson(id: String!): Person
+
+//     addCar(
+//         id: String
+//         year: Int!
+//         make: String!
+//         model: String!
+//         price: Float!
+//         personId: String!
+//       ): Car
+
+//       updateCar(
+//         id: String!
+//         year: Int
+//         make: String
+//         model: String
+//         price: Float
+//         personId: String
+//       ): Car
+
+//       removeCar(id: String!): Car
+//     }
+// `;
+
 const typeDefs = gql`
   type Person {
     id: String!
@@ -71,17 +123,17 @@ const typeDefs = gql`
 
   type Car {
     id: String!
+    year: Int!
     make: String!
     model: String!
-    year: Int!
     price: Float!
     personId: String!
   }
 
   type Query {
     person(id: String!): Person
-    people: [People]
-    car(id: String): Car
+    people: [Person]
+    car(id: String!): Car
     cars: [Car]
   }
 
@@ -89,29 +141,28 @@ const typeDefs = gql`
     addPerson(id: String, firstName: String!, lastName: String!): Person
 
     updatePerson(id: String!, firstName: String, lastName: String): Person
-
+    
     removePerson(id: String!): Person
 
     addCar(
-        id: String
-        year: Int!
-        make: String!
-        model: String!
-        price: Float!
-        personId: String!
-      ): Car
-  
-      updateCar(
-        id: String!
-        year: Int
-        make: String
-        model: String
-        price: Float
-        personId: String
-      ): Car
-  
-      removeCar(id: String!): Car
-    }
+      id: String
+      year: Int!
+      make: String!
+      model: String!
+      price: Float!
+      personId: String!
+    ): Car
+    
+    updateCar(
+      id: String!
+      year: Int
+      make: String
+      model: String
+      price: Float
+      personId: String
+    ): Car
+    
+    removeCar(id: String!): Car
   }
 `;
 
@@ -128,7 +179,6 @@ const resolvers = {
   },
 
   Mutation: {
-    
     /* Mutation functions for people */
     addPerson(root, args) {
       const newPerson = {
