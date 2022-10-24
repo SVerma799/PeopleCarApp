@@ -1,20 +1,18 @@
 import { List } from "antd";
 import Person from "../ListItemFolder/Person";
 
-const getStyles = () => ({
-  list: {
-    display: "flex",
-    justifyContent: "center",
-  },
-});
-
 const People = ({ peopleWithCars }) => {
-  const styles = getStyles();
-
   return (
-    <List grid={{ gutter: 20, column: 1 }} style={styles.list}>
+    <List
+      style={{
+        display: "flex ",
+        justifyContent: "flex-start",
+        margin: "1rem",
+      }}
+    >
       {peopleWithCars.map(({ id, firstName, lastName, ownCars }) => (
         <List.Item key={id}>
+          {/* using Person card to show list of person with cars list */}
           <Person
             key={id}
             id={id}

@@ -3,18 +3,10 @@ import { Link } from "react-router-dom";
 import { Card } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import Update from "../forms/Person/Update";
-
-const getStyles = () => ({
-  card: {
-    width: "500px",
-    backgroundColor: "#eee",
-    marginBottom: "70px",
-    border: "1px solid grey",
-  },
-});
+import Car from "../ListFolder/Car";
+import RemovePerson from "../buttons/RemovePerson";
 
 const Person = (props) => {
-  const styles = getStyles();
   const [id] = useState(props.id);
   const [personName, setPersonName] = useState({
     firstName: props.firstName,
@@ -41,11 +33,21 @@ const Person = (props) => {
         />
       ) : (
         <Card
+          // action for the edit button and remove button
           actions={[
-            <EditOutlined key="edit" onClick={handleButtonClick} />,
-            // <RemovePerson id={id} ownCars={props.ownCars} />,
+            <EditOutlined
+              style={{ color: "blue" }}
+              key="edit"
+              onClick={handleButtonClick}
+            />,
+            <RemovePerson id={id} ownCars={props.ownCars} />,
           ]}
-          style={styles.card}
+          style={{
+            width: "400px",
+            backgroundColor: "lightgrey",
+            border: "1px solid grey",
+            marginBottom: "1rem",
+          }}
         >
           <p
             style={{
@@ -56,18 +58,18 @@ const Person = (props) => {
           >
             {personName.firstName} {personName.lastName}
           </p>
-          {/* {props.ownCars.map(({ id, make, model }) => (
+          {/* Showing the  list of cars of the Person */}
+          {props.ownCars.map(({ id, make, model }) => (
             <Car key={id} id={id} make={make} model={model} />
-          ))} */}
+          ))}
           <Link
             to={`/people/${id}`}
             style={{
               fontWeight: "bold",
-              textDecoration: "underline",
-              color: "navy",
+              color: "Blue",
             }}
           >
-            Learn More to Edit Car Info
+            Edit
           </Link>
         </Card>
       )}

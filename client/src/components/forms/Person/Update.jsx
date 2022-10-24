@@ -12,15 +12,8 @@ const Update = (props) => {
   });
 
   const [form] = Form.useForm();
-  //   const [, forceUpdate] = useState();
-
-  //   useEffect(() => {
-  //     forceUpdate({});
-  //   }, []);
-
-  const onFinish = (values) => {
+  const onSubmit = (values) => {
     const { firstName, lastName } = values;
-
     updatePerson({
       variables: {
         id,
@@ -28,7 +21,6 @@ const Update = (props) => {
         lastName,
       },
     });
-
     props.onButtonClick();
   };
 
@@ -43,7 +35,7 @@ const Update = (props) => {
       form={form}
       name="update-person-form"
       layout="inline"
-      onFinish={onFinish}
+      onFinish={onSubmit}
       initialValues={{
         firstName: personName.firstName,
         lastName: personName.lastName,
@@ -59,6 +51,7 @@ const Update = (props) => {
           onChange={(e) => updateStateVariable("firstName", e.target)}
         />
       </Form.Item>
+
       <Form.Item
         name="lastName"
         rules={[{ required: true, message: "Please input your Last Name" }]}
@@ -69,6 +62,7 @@ const Update = (props) => {
           onChange={(e) => updateStateVariable("lastName", e.target)}
         />
       </Form.Item>
+      
       <Form.Item shouldUpdate={true}>
         {() => (
           <Button
