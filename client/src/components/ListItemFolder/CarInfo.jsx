@@ -62,19 +62,34 @@ const CarInfo = (props) => {
           ]}
         >
           <p>
-            <span className="car-detail-label">Year:</span> {props.year}
+            <span className="car-detail-label" style={{ fontWeight: "bold" }}>
+              Year:
+            </span>{" "}
+            {props.year}
           </p>
           <p>
-            <span className="car-detail-label">Make:</span> {props.make}
+            <span className="car-detail-label" style={{ fontWeight: "bold" }}>
+              Make:
+            </span>{" "}
+            {props.make}
           </p>
           <p>
-            <span className="car-detail-label">Model:</span> {props.model}
+            <span className="car-detail-label" style={{ fontWeight: "bold" }}>
+              Model:
+            </span>{" "}
+            {props.model}
           </p>
           <p>
-            <span className="car-detail-label">Price:</span> ${formattedPrice}
+            <span className="car-detail-label" style={{ fontWeight: "bold" }}>
+              Price:
+            </span>{" "}
+            ${formattedPrice}
           </p>
           <p>
-            <span className="car-detail-label">Owner</span> ID: {props.personId}
+            <span className="car-detail-label" style={{ fontWeight: "bold" }}>
+              Owner
+            </span>{" "}
+            ID: {props.personId}
           </p>
         </Card>
       )}

@@ -5,15 +5,7 @@ import { GET_PERSON_WITH_CARS } from "../queries";
 import { Card } from "antd";
 import CarInfo from "./ListItemFolder/CarInfo";
 
-const getStyles = () => ({
-  card: {
-    width: "500px",
-    backgroundColor: "#d1fffd",
-  },
-});
-
 const PersonSpecificPage = (props) => {
-  const styles = getStyles();
   const { personId } = useParams();
 
   const { loading, error, data } = useQuery(GET_PERSON_WITH_CARS, {
@@ -40,13 +32,22 @@ const PersonSpecificPage = (props) => {
 
   return (
     <div className="App">
-      <h1 style={{ margin: "40px auto" }}>Detail Page</h1>
-      <Card style={styles.card}>
+      <h1 style={{ margin: "40px auto" }}>
+        {firstName} {lastName}'s Detail Page
+      </h1>
+      <Card
+        style={{
+          width: "500px",
+          borderRadius: "10px",
+          margin: "1rem auto",
+          backgroundColor: "lightgrey",
+        }}
+      >
         <p
           style={{
             fontWeight: "bold",
             marginBottom: "20px",
-            fontSize: "20px",
+            fontSize: "40px",
           }}
         >
           {firstName} {lastName}
@@ -68,7 +69,7 @@ const PersonSpecificPage = (props) => {
         style={{
           fontWeight: "bold",
           fontSize: "25px",
-          color: "navy",
+          color: "blue",
           textDecoration: "underline",
           margin: "40px auto",
         }}
